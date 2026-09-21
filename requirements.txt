@@ -41,3 +41,6 @@ pydantic>=2.0.0
 
 # Dashboard
 streamlit>=1.25.0
+
+# Tests
+pytest>=8.0.0
