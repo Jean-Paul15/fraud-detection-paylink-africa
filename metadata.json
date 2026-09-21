@@ -1,0 +1,157 @@
+{
+  "model_info": {
+    "name": "Ensemble Stacking (Isolation Forest + Autoencoder + LightGBM)",
+    "type": "LogisticRegression meta-model on 3 base model scores",
+    "version": "1.0.0",
+    "institution": "PayLink Africa",
+    "domain": "Real-time Fraud Detection — Fintech UEMOA",
+    "created_at": "2026-05-21",
+    "random_state": 42,
+    "base_models": {
+      "isolation_forest": {
+        "type": "unsupervised anomaly detection",
+        "purpose": "Statistical anomaly detection"
+      },
+      "autoencoder": {
+        "type": "deep learning reconstruction error",
+        "purpose": "Non-linear pattern detection"
+      },
+      "lightgbm": {
+        "type": "supervised gradient boosting",
+        "purpose": "Supervised fraud pattern learning",
+        "training": "SMOTE (sampling_strategy=0.15) + class_weight='balanced'"
+      }
+    }
+  },
+  "performance": {
+    "isolation_forest": {
+      "auc_roc": 0.5993,
+      "auc_pr": 0.0028,
+      "recall_at_fpr_1pct": 0.0425,
+      "recall_at_fpr_2pct": 0.0759,
+      "precision_at_recall_80": 0.0018,
+      "f1": 0.0,
+      "lift_1pct": 4.25,
+      "lift_5pct": 2.99
+    },
+    "autoencoder": {
+      "auc_roc": 0.6554,
+      "auc_pr": 0.0059,
+      "recall_at_fpr_1pct": 0.1377,
+      "recall_at_fpr_2pct": 0.1596,
+      "precision_at_recall_80": 0.0019,
+      "f1": 0.0,
+      "lift_1pct": 13.9,
+      "lift_5pct": 4.56
+    },
+    "lightgbm": {
+      "auc_roc": 0.8822,
+      "auc_pr": 0.0622,
+      "recall_at_fpr_1pct": 0.3333,
+      "recall_at_fpr_2pct": 0.4003,
+      "precision_at_recall_80": 0.0051,
+      "f1": 0.1362,
+      "lift_1pct": 32.95,
+      "lift_5pct": 10.12
+    },
+    "ensemble_stacking": {
+      "auc_roc": 0.8779,
+      "auc_pr": 0.0661,
+      "recall_at_fpr_1pct": 0.3359,
+      "recall_at_fpr_2pct": 0.4015,
+      "precision_at_recall_80": 0.0051,
+      "f1": 0.0553,
+      "lift_1pct": 33.21,
+      "lift_5pct": 10.19
+    },
+    "cross_validation": {
+      "cv_auc_pr_mean": 0.9934,
+      "cv_auc_pr_std": 0.0080,
+      "cv_folds": 3
+    },
+    "cost_benefit": {
+      "best_roi_model": "Stacking",
+      "best_roi": 0.6532,
+      "cost_false_positive": 5000,
+      "cost_false_negative": 500000,
+      "investigation_budget": 1000000,
+      "currency": "FCFA",
+      "estimated_annual_savings": 77000000
+    }
+  },
+  "features": {
+    "n_features": 50,
+    "selection_method": "VarianceThreshold + Anti-correlation (0.95) + Top 50 LGB importance",
+    "top_features": [
+      "sender_tx_count_cumulative",
+      "sender_account_age_log",
+      "receiver_g_total_received",
+      "sender_g_total_sent",
+      "sender_g_total_received",
+      "day_of_month",
+      "receiver_g_flow_ratio",
+      "sender_g_flow_ratio",
+      "time_since_last_tx_sec",
+      "receiver_g_in_degree",
+      "receiver_g_out_degree",
+      "receiver_g_total_sent",
+      "sender_g_in_degree",
+      "hour_cos",
+      "hour_sin",
+      "tx_type_payment",
+      "sender_g_is_fraud_account",
+      "channel_agent",
+      "sender_amount_sum_24h",
+      "tx_type_transfer",
+      "city_LOM",
+      "tx_type_withdrawal",
+      "city_LBV",
+      "city_OUA",
+      "sender_kyc",
+      "city_OTHER",
+      "city_DLA",
+      "city_changed",
+      "city_COT",
+      "channel_mobile_app",
+      "channel_api",
+      "channel_ussd",
+      "city_DAK",
+      "kyc_2",
+      "city_BKO",
+      "device_changed",
+      "channel_web",
+      "city_ABJ",
+      "tx_type_bill_pay",
+      "kyc_1",
+      "sender_amount_sum_6h",
+      "tx_type_deposit",
+      "receiver_g_is_fraud_account",
+      "sender_amount_sum_1h",
+      "receiver_is_new",
+      "sender_tx_count_24h",
+      "sender_tx_count_1h",
+      "sender_tx_count_6h",
+      "kyc_3",
+      "sender_amount_std_6h"
+    ]
+  },
+  "data": {
+    "n_train": 500000,
+    "n_test": 501458,
+    "fraud_rate_train": 0.004446,
+    "fraud_rate_test": 0.001549,
+    "fraud_rate_global": 0.0015,
+    "n_frauds_train": 2223,
+    "n_frauds_test": 777,
+    "train_sampling": "Stratified: all frauds kept + legitimate sample to reach 500k",
+    "test_sampling": "Full test set (no sampling)",
+    "temporal_split": "Chronological (no leakage verified)",
+    "fraud_types": [
+      "account_takeover",
+      "stolen_card",
+      "mule_network",
+      "synthetic_id",
+      "internal"
+    ]
+  }
+}

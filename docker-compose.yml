@@ -1,0 +1,26 @@
+services:
+  api:
+    build: .
+    ports:
+      - "8001:8001"
+    command: uvicorn api.main:app --host 0.0.0.0 --port 8001
+    restart: unless-stopped
+    volumes:
+      - ./outputs/models:/app/outputs/models:ro
+    healthcheck:
+      # curl n'est pas installe sur python:3.11-slim : on verifie l'endpoint
+      # avec l'interpreteur Python deja present dans l'image, sans alourdir
+      # l'image d'un paquet supplementaire.
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8001/health', timeout=3)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  dashboard:
+    build: .
+    ports:
+      - "8501:8501"
+    command: streamlit run dashboard/app.py --server.port 8501 --server.address 0.0.0.0
+    restart: unless-stopped
+    volumes:
+      - ./outputs/models:/app/outputs/models:ro

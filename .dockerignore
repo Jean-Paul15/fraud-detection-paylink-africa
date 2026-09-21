@@ -1,0 +1,25 @@
+# Environnement et cache
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Donnees et artefacts volumineux : montes en volume au runtime,
+# jamais copies dans l'image (l'image ne doit contenir que code + deps)
+data/
+outputs/
+_archive/
+*.pkl
+*.pt
+*.pth
+
+# Notebooks et tests : inutiles a l'execution de l'API/dashboard
+notebooks/
+tests/
+*.ipynb
+
+# Git et outillage local
+.git/
+.gitignore
+.dockerignore
+.claude/

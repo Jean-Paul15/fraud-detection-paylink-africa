@@ -1,0 +1,57 @@
+# Environnement virtuel
+venv/
+
+# Cache Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Archives
+_archive/
+
+# Outputs (modeles, figures, resultats)
+outputs/
+
+# Donnees
+data/raw/
+data/processed/
+data/graph/
+
+# Modeles serialises (tous formats)
+*.joblib
+*.pkl
+*.pt
+*.pth
+*.h5
+*.hdf5
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environnement
+.env
+.env.local
+.env.*.local
+
+# Tests
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Distribution
+dist/
+build/
+*.egg-info/
