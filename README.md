@@ -1,7 +1,7 @@
 # Détection de Fraude en Temps Réel -- PayLink Africa
 
 [![Tests](https://github.com/Jean-Paul15/fraud-detection-paylink-africa/actions/workflows/tests.yml/badge.svg)](https://github.com/Jean-Paul15/fraud-detection-paylink-africa/actions/workflows/tests.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![License: CC BY-NC-ND 4.0](https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-lightgrey.svg)](LICENSE)
 [![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-blue.svg)](requirements.txt)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-ee4c2c.svg)](requirements.txt)
 
